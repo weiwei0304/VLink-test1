@@ -1,24 +1,20 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+document.addEventListener('DOMContentLoaded', () => {
+  // 獲取所有導航連結
+  const navLinks = document.querySelectorAll('.sidebar-menu a');
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+  // 為每個連結添加點擊事件
+  navLinks.forEach((link) => {
+    link.addEventListener('click', function (e) {
+      // 阻止默認跳轉行為
+      e.preventDefault();
 
-setupCounter(document.querySelector('#counter'))
+      // 移除所有連結的 active 類
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+      });
+
+      // 為被點擊的連結添加 active 類
+      this.classList.add('active');
+    });
+  });
+});
