@@ -88,11 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('mouseup', stopDragging);
   document.addEventListener('mouseleave', stopDragging);
 
-  const hamburger = document.querySelector('.hamburger');
+  const menuButton = document.querySelector('.menu-button');
+  const closeButton = document.querySelector('.close-button');
   const sidebar = document.querySelector('.sidebar');
 
-  hamburger.addEventListener('click', function () {
-    hamburger.classList.toggle('active');
-    sidebar.classList.toggle('active');
+  menuButton.addEventListener('click', function () {
+    sidebar.classList.add('active');
+  });
+
+  closeButton.addEventListener('click', function () {
+    sidebar.classList.remove('active');
   });
 });

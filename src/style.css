@@ -140,6 +140,44 @@ body.dragging {
   cursor: grabbing !important;
 }
 
+.mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  align-items: center;
+}
+
+.mobile-header span {
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.close-button {
+  display: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
 /* 平板設備 */
 @media (max-width: 1024px) {
   .sidebar {
@@ -171,19 +209,58 @@ body.dragging {
     flex-direction: column;
   }
 
-  .sidebar {
+  .mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    position: relative;
-    padding: 10px;
+    height: 54px;
+    background: white;
+    z-index: 1000;
+  }
+
+  .close-button {
+    display: block;
+  }
+  .sidebar {
+    position: fixed; /* 改回 fixed */
+    top: 54px; /* 從 header 下方開始 */
+    left: 0;
+    width: 100%;
+    height: 0; /* 初始高度為 0 */
+    background: #f5f5f5;
+    padding: 0; /* 初始 padding 為 0 */
+    overflow: hidden; /* 隱藏溢出內容 */
+    transition: all 0.3s ease;
+    z-index: 99;
+  }
+
+  .sidebar.active {
+    height: auto; /* 展開時自動適應內容高度 */
+    padding: 20px; /* 展開時恢復 padding */
+  }
+
+  .main-content {
+    margin: 0;
+    width: 100%;
+    padding-top: 54px; /* header 高度 */
+    transition: transform 0.3s ease;
+  }
+
+  body.menu-open .main-content {
+    transform: translateY(var(--menu-height, 0px));
+  }
+
+  .sidebar.active .sidebar-menu {
+    opacity: 1; /* 展開時顯示 */
   }
 
   .sidebar-menu {
     padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    padding-bottom: 10px;
+    opacity: 0; /* 初始透明 */
+    transition: opacity 0.3s ease;
   }
 
   .sidebar-menu li {
